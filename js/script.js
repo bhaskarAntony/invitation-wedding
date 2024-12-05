@@ -6,20 +6,30 @@
     $('.sakura-falling').sakura();
 })(jQuery);
 
+$(document).ready(function() {
+    var myaudio = document.getElementById("my_audio");
 
-var myaudio = document.getElementById("my_audio");
-$(document).click
-$(document).on('load', function () {
-    $(document).click
-});
-$(document).on('click', function () {
-    myaudio.play();
-    console.log('Shaadi me zaroor aana');
+    // Attempt to play audio on page load by simulating a click event
+    function playAudio() {
+        myaudio.muted = false;
+        myaudio.play().then(() => {
+            console.log('Audio started automatically.');
+        }).catch((error) => {
+            console.log('Autoplay blocked. Will try again on user interaction.');
+        });
+    }
+
+    // Trigger a simulated click to try to initiate playback
+    $(document).trigger('click');
+    playAudio();
+
+    // Fallback: Play on user interaction if autoplay is blocked
+    $(document).one('click', playAudio);
 });
 
 
 // Set the date we're counting down to
-var countDownDate = new Date("nov 16, 2024 6:30:00").getTime();
+var countDownDate = new Date("nov 07, 2024 6:30:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function () {
